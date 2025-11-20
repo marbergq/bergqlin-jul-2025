@@ -119,6 +119,7 @@ const wishlistData = {
       description: "Grön RC offroad bil med kraftiga däck",
       link: "https://toyspace.se/gron-rc-offroad-bil-med-kraftiga-dack-a2051-uj99-p181?gad_source=1",
       image: "images/bosse_rc.jpg",
+      price: 244,
       bought: false
     },
     {
@@ -134,7 +135,8 @@ const wishlistData = {
       description: "PowerPlay fotbollsspel spelbord 4-i-1",
       link: "https://www.clasohlson.com/se/PowerPlay-fotbollsspel-spelbord-4-i-1,-fr%C3%A5n-5-%C3%A5r/p/31-7362",
       image: "images/bosse_football.jpg",
-      bought: false
+      bought: false,
+      price: 799
     },
     {
       title: "Basketkorg",
