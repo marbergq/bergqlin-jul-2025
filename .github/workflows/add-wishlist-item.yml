@@ -1,0 +1,62 @@
+name: Add Wishlist Item
+
+on:
+  workflow_dispatch:
+    inputs:
+      person:
+        description: 'Who is wishing for this item (frans or bosse)'
+        required: true
+        type: choice
+        options:
+          - frans
+          - bosse
+      title:
+        description: 'Item title'
+        required: true
+        type: string
+      description:
+        description: 'Item description'
+        required: true
+        type: string
+      price:
+        description: 'Price in SEK'
+        required: true
+        type: string
+      link:
+        description: 'Link to the item'
+        required: true
+        type: string
+      image_url:
+        description: 'Image URL for the item'
+        required: true
+        type: string
+
+jobs:
+  add-item:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Add item to wishlist
+        run: node scripts/add-wishlist-item.js
+        env:
+          PERSON: ${{ github.event.inputs.person }}
+          TITLE: ${{ github.event.inputs.title }}
+          DESCRIPTION: ${{ github.event.inputs.description }}
+          PRICE: ${{ github.event.inputs.price }}
+          LINK: ${{ github.event.inputs.link }}
+          IMAGE_URL: ${{ github.event.inputs.image_url }}
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data.js
+          git commit -m "Add ${{ github.event.inputs.title }} to ${{ github.event.inputs.person }}'s wishlist"
+          git push
